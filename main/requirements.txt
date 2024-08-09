@@ -1,0 +1,6 @@
+django==5.0
+django-qr-code==4.1.0
+qrcode[pil]
+Pillow
+python-decouple
+psycopg

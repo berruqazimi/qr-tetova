@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block title %}Register{% endblock %}
+
+{% block header %}Welcome to Tetova{% endblock %}
+
+{% block content %}
+    {% include 'navbar.html' %}
+
+        <div class="container">
+        <header class="my-4">
+            <h1 class="text-center">Register QR Code</h1>
+        </header>
+
+        <form method="post">
+            {% csrf_token %}
+            {% if form.errors %}
+                <div class="alert alert-danger">
+                    {% for field in form %}
+                        {% if field.errors %}
+                            {% for error in field.errors %}
+                                <p>{{ error }}</p>
+                            {% endfor %}
+                        {% endif %}
+                    {% endfor %}
+                </div>
+        {% endif %}
+            {{ form.as_p }}
+            <button type="submit" class="btn btn-primary">Generate QR Code</button>
+        </form>
+    </div>
+{% endblock %}

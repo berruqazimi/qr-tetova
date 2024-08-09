@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block title %}Retrieve{% endblock %}
+
+{% block header %}Welcome to Tetova{% endblock %}
+
+{% block content %}
+    {% include 'navbar.html' %}
+
+    <div class="container">
+        <h1 class="text-center">QR Code</h1>
+        <p class="lead">Name: {{ qr_code_instance.name }}</p>
+        <div class="text-center">
+            <img src="{{ qr_code_instance.qr_code.url }}" alt="QR Code" class="qr-image">
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block title %}Delete QR Code{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <h1>Are you sure you want to delete this QR code?</h1>
+        <p>Name: {{ qr_code.name }}</p>
+        <p>Link: <a href="{{ qr_code.link }}" target="_blank">{{ qr_code.link }}</a></p>
+        <form method="post">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger">Yes, delete it</button>
+            <a href="{% url 'search' %}" class="btn btn-secondary">Cancel</a>
+        </form>
+    </div>
+{% endblock %}

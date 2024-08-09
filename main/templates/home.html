@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block header %}Welcome to Tetova{% endblock %}
+
+{% block content %}
+    {% include 'navbar.html' %}
+    <p class="lead text-center">This is a simple page where you can search for specific things and get a QR code. You can also register the entries as well.</p>
+
+    {% include 'carousel.html' %}
+    <div class="text-center my-4">
+    </div>
+{% endblock %}
