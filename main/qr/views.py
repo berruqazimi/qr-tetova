@@ -2,7 +2,12 @@ from django.shortcuts import render, redirect ,get_object_or_404
 from .models import QRCodeModel
 from .forms import QRCodeForm,SearchForm
 from django.contrib.auth.decorators import permission_required
-
+from django.contrib import messages
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+from rest_framework import status
+from django.http import Http404
+from .serializers import QRCodeSerializer
 
 
 
@@ -43,8 +48,12 @@ def update_qr_code(request, id):
     if request.method == 'POST':
         form = QRCodeForm(request.POST, instance=qr_code)
         if form.is_valid():
-            form.save()
-            return redirect('search')
+            if form.has_changed():
+                form.save()
+                return redirect('search')
+            else:
+                messages.info(request,'No changes are made')
+                return redirect('search')
     else:
         form = QRCodeForm(instance=qr_code)
     return render(request, 'update_qr_code.html', {'form': form})
@@ -55,3 +64,9 @@ def delete_qr_code(request, id):
         qr_code.delete()
         return redirect('search')
     return render(request, 'delete_qr_code.html', {'qr_code': qr_code})
+@api_view(['GET'])
+def get_data(request):
+    if request.method == 'GET':
+        qr_codes = QRCodeModel.objects.all()
+        serializer = QRCodeSerializer(qr_codes, many=True)
+        return Response(serializer.data)

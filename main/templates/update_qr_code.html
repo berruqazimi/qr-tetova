@@ -1,14 +1,26 @@
 {% extends 'base.html' %}
-
 {% block title %}Update QR Code{% endblock %}
+{% include 'navbar.html' %}
 
 {% block content %}
     <div class="container">
         <h1>Update QR Code</h1>
+
+        {% if messages %}
+            <div>
+                {% for message in messages %}
+                    <div class="alert {% if message.tags %}alert-{{ message.tags }}{% else %}alert-info{% endif %}">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
         <form method="post">
             {% csrf_token %}
             {{ form.as_p }}
             <button type="submit" class="btn btn-info">Save changes</button>
+            <a href="{% url 'search' %}" class="btn btn-secondary">Cancel</a>
+
         </form>
     </div>
 {% endblock %}

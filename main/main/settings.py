@@ -38,7 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'qr.apps.QrConfig'
+    'qr.apps.QrConfig',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
